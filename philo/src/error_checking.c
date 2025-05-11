@@ -6,13 +6,13 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 12:01:06 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/11 12:34:34 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/11 12:40:06 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_nbr_numeric(char *argv[])
+bool	check_nbr_numeric(char *argv[])
 {
 	int	index;
 	int count;
@@ -26,23 +26,30 @@ void	check_nbr_numeric(char *argv[])
 			if(argv[index][count] < '0' || argv[index][count] > '9')
 			{
 				(void)printf("Non numeric argument\n");
-				return ;
+				return (true);
 			}
 			count++;
 		}
 		index++;
 	}
+	return (false);
 }
 
-void	check_nbr_arg(int argc)
+bool	check_nbr_arg(int argc)
 {
 	if(argc < 5 || argc > 6)
+	{
 		(void)printf("Wrong number of arguments\n");
+		return (true);
+	}
+	return (false);
 }
 
-void	check_arguments(int argc, char *argv[])
+bool	check_arguments(int argc, char *argv[])
 {
-	(void)argv;
-	check_nbr_arg(argc);
-	check_nbr_numeric(argv);
+	if(check_nbr_arg(argc))
+		return(true);
+	if(check_nbr_numeric(argv))
+		return(true);
+	return(false);
 }

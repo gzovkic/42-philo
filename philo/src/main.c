@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/11 12:02:25 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/11 12:38:16 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int main(int argc, char **argv)
 {
 	
 
-	check_arguments(argc, argv);
+	if(check_arguments(argc, argv))
+		return (0);
 	
 	return (0);
 }
