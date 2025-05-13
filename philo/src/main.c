@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 09:50:26 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 13:09:18 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv)
 {
 	t_dinner	*dinner;
 
+	dinner = NULL;
 	if (check_arguments(argc, argv))
 		return (1);
 	create_dinner(dinner, argv);

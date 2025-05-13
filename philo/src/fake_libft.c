@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:57:53 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 09:36:16 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 13:10:04 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,23 @@ void	ft_putstr_fd(char *s, int fd)
 		write (fd, &s[i], 1);
 		i++;
 	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*arr;
+	size_t			store;
+	size_t			i;
+
+	store = count * size;
+	arr = malloc(store);
+	if (!arr)
+		return (NULL);
+	i = 0;
+	while (i < store)
+	{
+		((unsigned char *)arr)[i] = 0;
+		i++;
+	}
+	return (arr);
 }
