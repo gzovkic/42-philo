@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 13:09:18 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 16:28:16 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	create_dinner(t_dinner *dinner, char *argv[])
 	dinner->philos = ft_calloc(dinner->number_of_philos, sizeof(t_philo));
 	if (!dinner->philos)
 	{
+
+
+		
 		(void)printf("Memory allocation failed\n");
 		return ;
 	}
@@ -51,6 +54,11 @@ void	create_dinner(t_dinner *dinner, char *argv[])
 	}
 }
 
+void create_mutexes(t_dinner *dinner)
+{
+	dinner.
+}
+
 int	main(int argc, char **argv)
 {
 	t_dinner	*dinner;
@@ -59,5 +67,6 @@ int	main(int argc, char **argv)
 	if (check_arguments(argc, argv))
 		return (1);
 	create_dinner(dinner, argv);
+	create_mutexes(dinner);
 	return (0);
 }
