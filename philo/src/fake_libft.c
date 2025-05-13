@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:57:53 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/12 16:27:22 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 08:38:52 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ long	ft_atol(char *str)
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		if (result > (LONG_MAX - (*str - '0' )) / 10)
+		if (result > (LONG_MAX - (*str - '0')) / 10)
 		{
 			if (sign == 1)
 				return (LONG_MAX);
