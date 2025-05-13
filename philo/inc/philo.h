@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 08:37:48 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 08:58:54 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,24 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
+
+typedef struct s_dinner
+{
+	t_philo			*philos;
+	int				num_philos;
+	int				time_to_die;
+	int				time_to_sleep;
+	int				time_to_eat;
+	int				times_must_eat;
+}	t_dinner;
+
+typedef struct s_philo
+{
+	t_dinner		*dinner;
+	int				philo_id;
+	int				last_meal;
+	int				meals_eaten;
+}	t_philo;
 
 // src/error_checking.c
 bool	check_nbr_numeric(char *argv[]);
@@ -30,4 +48,5 @@ bool	check_statments(char *argv[], int index, int count);
 
 // src/fake_libft.c
 size_t	ft_strlen(const char *str);
-long	ft_atol(char *str);
+long	ft_atol(const char *str);
+int		ft_atoi(const char *str);
