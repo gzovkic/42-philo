@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 09:06:40 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 09:42:11 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,23 @@ typedef struct s_dinner
 	int				time_to_sleep;
 	int				time_to_eat;
 	int				times_must_eat;
+	int				start_timer_of_sim;
+	int				sim_status;
 }	t_dinner;
 
 typedef struct s_philo
 {
 	t_dinner		*dinner;
 	int				philo_id;
-	int				last_meal;
+	int				time_since_last_meal;
 	int				meals_eaten;
 }	t_philo;
 
 typedef enum PHILO
 {
-	TIME_MUST_EAT_NOT_SET = -1
+	TIME_MUST_EAT_NOT_SET = -1,
+	SIM_ACTIV = 0,
+	SIM_INACTIV
 }	t_PHILO;
 
 // src/error_checking.c
@@ -55,3 +59,4 @@ bool	check_statments(char *argv[], int index, int count);
 size_t	ft_strlen(const char *str);
 long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
+void	ft_putstr_fd(char *s, int fd);

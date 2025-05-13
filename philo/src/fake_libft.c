@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:57:53 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 08:56:33 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/13 09:36:16 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,18 @@ int	ft_atoi(const char *str)
 	if (min_count % 2 != 0)
 		nb = -nb;
 	return (nb);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL || fd <= 0)
+		return ;
+	while (s[i] != '\0')
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
 }
