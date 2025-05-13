@@ -6,18 +6,16 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/11 12:38:16 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/11 12:42:45 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	
+	if (check_arguments(argc, argv))
+		return (-1);
 
-	if(check_arguments(argc, argv))
-		return (0);
-	
 	return (0);
 }
