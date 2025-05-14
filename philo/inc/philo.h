@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/14 13:37:34 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/14 13:42:00 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef enum PHILO_ENUMS
 	SIM_ACTIV,
 	SIM_INACTIV
 }					t_PHILO;
+
+// src/main.c
+void				*routine(void *arg);
 
 // src/error_checking.c
 bool				check_nbr_numeric(char *argv[]);
