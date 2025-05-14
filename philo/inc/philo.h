@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/13 13:09:54 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/14 13:37:34 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,11 @@ long				ft_atol(const char *str);
 int					ft_atoi(const char *str);
 void				ft_putstr_fd(char *s, int fd);
 void				*ft_calloc(size_t count, size_t size);
+
+// src/create_structs.c
+void				create_dinner(t_dinner *dinner, char *argv[]);
+void				create_mutexes(t_dinner *dinner);
+void				create_threads(t_dinner *dinner, pthread_t *philos);
+
+// src/utils.c
+long				curr_time(void);
