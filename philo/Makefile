@@ -63,13 +63,11 @@ $(OBJ_DIR):
 clean:
 	@echo "$(COLOR_GREEN)Cleaning object files...$(COLOR_RESET)"
 	@$(RM) $(OBJS)
-	@$(MAKE) -C clean
 
 fclean: clean
 	@echo "$(COLOR_GREEN)Removing $(NAME)...$(COLOR_RESET)"
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
-	@$(MAKE) -C fclean
 	@echo "$(COLOR_GREEN)Removed files successfully$(COLOR_RESET)"
 
 re: fclean all

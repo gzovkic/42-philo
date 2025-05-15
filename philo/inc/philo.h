@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/14 13:42:00 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/15 13:29:20 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 	int				philo_id;
 	int				time_since_last_meal;
 	int				meals_eaten;
+	pthread_t		thread;
 }					t_philo;
 
 typedef enum PHILO_ENUMS
@@ -71,7 +72,7 @@ void				*ft_calloc(size_t count, size_t size);
 // src/create_structs.c
 void				create_dinner(t_dinner *dinner, char *argv[]);
 void				create_mutexes(t_dinner *dinner);
-void				create_threads(t_dinner *dinner, pthread_t *philos);
+t_philo				*init_philo_struct(t_dinner *dinner);
 
 // src/utils.c
 long				curr_time(void);
