@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/18 15:00:34 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/18 15:59:41 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_philo_node;
 
 typedef struct s_dinner
 {
-	pthread_mutex_t		*print_action_mutex;
+	pthread_mutex_t		print_action_mutex;
 	int					number_of_philos;
 	time_t				time_to_die;
 	time_t				time_to_sleep;
@@ -92,3 +92,7 @@ void					pthread_wait(t_philo_list *philo_list);
 
 // src/testing.c
 void					print_philo_list(t_philo_list *philo_list);
+
+
+
+void	print_action(t_dinner *dinner, int philo_id, char *str);

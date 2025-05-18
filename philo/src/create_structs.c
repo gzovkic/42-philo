@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:34:41 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/18 14:57:35 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/18 16:00:13 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	create_dinner(t_dinner *dinner, char *argv[])
 		dinner->times_must_eat = TIME_MUST_EAT_NOT_SET;
 	dinner->start_timer_of_sim = curr_time();
 	dinner->sim_status = SIM_ACTIV;
+	pthread_mutex_init(&dinner->print_action_mutex, NULL);
 }
 
 void	add_philo_node(t_philo_list *philo_list, t_dinner *dinner, int count)
