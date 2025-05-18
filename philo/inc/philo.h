@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/18 12:20:31 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/18 15:00:34 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_dinner
 }						t_dinner;
 typedef struct s_philo_node
 {
+	t_dinner			*dinner;
 	int					philo_id;
 	int					time_since_last_meal;
 	int					meals_eaten;
@@ -45,9 +46,7 @@ typedef struct s_philo_list
 	t_philo_node		*head;
 	t_philo_node		*tail;
 	ssize_t				size;
-	t_dinner			*dinner;
 }						t_philo_list;
-
 
 typedef enum PHILO_ENUMS
 {
@@ -58,6 +57,7 @@ typedef enum PHILO_ENUMS
 
 // src/main.c
 void					*routine(void *arg);
+void					routine_loop(t_philo_node *philo_node);
 
 // src/error_checking.c
 bool					check_nbr_numeric(char *argv[]);
@@ -78,6 +78,17 @@ void					*ft_calloc(size_t count, size_t size);
 
 // src/create_structs.c
 void					create_dinner(t_dinner *dinner, char *argv[]);
-void					create_mutexes(t_dinner *dinner);
+void					add_philo_node(t_philo_list *philo_list,
+							t_dinner *dinner, int count);
+void					fill_philo_list(t_philo_list *philo_list,
+							t_dinner *dinner);
+t_philo_list			*init_philo_list(void);
+
 // src/utils.c
 long					curr_time(void);
+bool					is_sim_active(t_dinner *dinner);
+void					pthread_creation(t_philo_list *philo_list);
+void					pthread_wait(t_philo_list *philo_list);
+
+// src/testing.c
+void					print_philo_list(t_philo_list *philo_list);
