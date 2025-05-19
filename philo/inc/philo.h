@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/18 15:59:41 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/19 11:03:30 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,14 @@ bool					is_sim_active(t_dinner *dinner);
 void					pthread_creation(t_philo_list *philo_list);
 void					pthread_wait(t_philo_list *philo_list);
 
+// src/philo_action.c
+void	pick_forks(t_philo_node *philo_node);
+void	philo_eat(t_philo_node *philo_node);
+void	philo_sleep(t_philo_node *philo_node);
+void	philo_think(t_philo_node *philo_node);
+void	print_action(t_dinner *dinner, int philo_id, char *str);
+
 // src/testing.c
 void					print_philo_list(t_philo_list *philo_list);
 
 
-
-void	print_action(t_dinner *dinner, int philo_id, char *str);
