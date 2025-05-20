@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 21:31:38 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/20 22:33:04 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ void	routine_loop(t_philo_node *philo_node)
 	if (!is_sim_active(philo_node->dinner))
 		return ;
 	philo_think(philo_node);
+	// if (philo_node->philo_id % 2 == 1)
+    //     usleep(200);
 	if (pick_forks(philo_node))
 	{
 		philo_eat(philo_node);

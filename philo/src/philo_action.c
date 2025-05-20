@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:02:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 21:52:11 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/20 22:27:36 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	pick_forks(t_philo_node *philo_node)
 	dinner = philo_node->dinner;
 	if (!is_sim_active(dinner))
 		return (false);
-	if (philo_node->philo_id % 2 == 1)
+	if (philo_node->philo_id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo_node->fork);
 		print_action(dinner, philo_node->philo_id, "has taken a fork");
@@ -28,6 +28,7 @@ bool	pick_forks(t_philo_node *philo_node)
 	}
 	else
 	{
+		usleep(200);
 		pthread_mutex_lock(&philo_node->next->fork);
 		print_action(dinner, philo_node->philo_id, "has taken a fork");
 		pthread_mutex_lock(&philo_node->fork);
