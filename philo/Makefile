@@ -29,7 +29,7 @@ SRC := $(addprefix src/, $(SRC_FILES))
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 # Compilation flags and linking options
-CFLAGS := -Wall -Wextra -Werror -g -Iinc -MMD -MP $(addprefix -I, $(INC_DIRS))
+CFLAGS := -Wall -Wextra -Werror -g -pthread -Iinc -MMD -MP $(addprefix -I, $(INC_DIRS))
 CFLAGS_SAN := $(CFLAGS) -fsanitize=address -g
 LDFLAGS_SAN := -fsanitize=address
 

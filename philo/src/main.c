@@ -6,13 +6,29 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 13:27:20 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:31:38 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 
+void one_philo_case(t_philo_node *philo_node)
+{
+	long	start_time;
+	t_dinner	*dinner;
+	
+	dinner = philo_node->dinner;
+	start_time = curr_time();
+	philo_think(philo_node);
+	pthread_mutex_lock(&philo_node->fork);
+	print_action(dinner, philo_node->philo_id, "has taken a fork");
+	philo_node->time_since_last_meal = start_time;
+	// Wait for the monitor to detect death
+	while (is_sim_active(dinner))
+		usleep(100);
+	pthread_mutex_unlock(&philo_node->fork);
+}
 int	main(int argc, char **argv)
 {
 	pthread_t		monitor_thread;
@@ -29,7 +45,6 @@ int	main(int argc, char **argv)
 	pthread_create(&monitor_thread, NULL, &monitor, philo_list);
 	pthread_wait(philo_list);
 	pthread_join(monitor_thread, NULL);
-	// pthread_mutex_destroy(&monitor_thread);
 	return (0);
 }
 
@@ -83,7 +98,6 @@ void	*monitor(void *arg)
 		}
 		if (!monitor_loop(philo_list, dinner))
 			return (NULL);
-		usleep(100);
 	}
 	return (NULL);
 }
@@ -102,11 +116,10 @@ bool	monitor_loop(t_philo_list *philo_list, t_dinner *dinner)
 		current_time = curr_time();
 		if (current_time - current->time_since_last_meal > dinner->time_to_die)
 		{
-			// pthread_mutex_lock(&dinner->print_action_mutex);
 			(void)printf("%ld %d died\n", current_time
 				- dinner->start_timer_of_sim, current->philo_id);
-			pthread_mutex_unlock(&dinner->print_action_mutex);
 			dinner->sim_status = SIM_INACTIV;
+			pthread_mutex_unlock(&dinner->print_action_mutex);
 			return (false);
 		}
 		current = current->next;
@@ -123,6 +136,11 @@ void	*routine(void *arg)
 
 	philo_node = (t_philo_node *)arg;
 	dinner = philo_node->dinner;
+	if (philo_node->dinner->number_of_philos == 1)
+	{
+		one_philo_case(philo_node);
+		return(NULL);
+	}
 	while (is_sim_active(dinner))
 	{
 		routine_loop(philo_node);
@@ -138,13 +156,11 @@ void	routine_loop(t_philo_node *philo_node)
 	if (!is_sim_active(philo_node->dinner))
 		return ;
 	philo_think(philo_node);
-	if (philo_node->philo_id % 2 == 1)
-		usleep(1000);
-	pick_forks(philo_node);
-	philo_eat(philo_node);
-	pthread_mutex_unlock(&philo_node->fork);
-	pthread_mutex_unlock(&philo_node->next->fork);
-	if (!is_sim_active(philo_node->dinner))
-		return ;
-	philo_sleep(philo_node);
+	if (pick_forks(philo_node))
+	{
+		philo_eat(philo_node);
+		pthread_mutex_unlock(&philo_node->fork);
+		pthread_mutex_unlock(&philo_node->next->fork);
+		philo_sleep(philo_node);
+	}
 }

@@ -6,19 +6,19 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:02:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 13:00:49 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:52:11 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	pick_forks(t_philo_node *philo_node)
+bool	pick_forks(t_philo_node *philo_node)
 {
 	t_dinner	*dinner;
 
 	dinner = philo_node->dinner;
 	if (!is_sim_active(dinner))
-		return ;
+		return (false);
 	if (philo_node->philo_id % 2 == 1)
 	{
 		pthread_mutex_lock(&philo_node->fork);
@@ -33,6 +33,7 @@ void	pick_forks(t_philo_node *philo_node)
 		pthread_mutex_lock(&philo_node->fork);
 		print_action(dinner, philo_node->philo_id, "has taken a fork");
 	}
+	return (true);
 }
 
 void	philo_eat(t_philo_node *philo_node)
@@ -40,13 +41,12 @@ void	philo_eat(t_philo_node *philo_node)
 	t_dinner	*dinner;
 
 	dinner = philo_node->dinner;
-	// pthread_mutex_lock(&dinner->print_action_mutex);
 	if (!is_sim_active(dinner))
-		return ;
+		return ;	
 	print_action(dinner, philo_node->philo_id, "is eating");
 	pthread_mutex_lock(&dinner->print_action_mutex);
-	philo_node->meals_eaten++;
 	philo_node->time_since_last_meal = curr_time();
+	philo_node->meals_eaten++;
 	pthread_mutex_unlock(&dinner->print_action_mutex);
 	usleep(dinner->time_to_eat * 1000);
 }
@@ -70,19 +70,20 @@ void	philo_think(t_philo_node *philo_node)
 	if (!is_sim_active(dinner))
 		return ;
 	print_action(dinner, philo_node->philo_id, "is thinking");
-	usleep(200 * 1000);
+	// usleep(time_diff * 1000);
 }
 
 void	print_action(t_dinner *dinner, int philo_id, char *str)
 {
 	long	timestamp;
 
-	if (!is_sim_active(dinner))
-	{
-	return ;
-	}
-		timestamp = curr_time() - dinner->start_timer_of_sim;
 	pthread_mutex_lock(&dinner->print_action_mutex);
+	if (!(dinner->sim_status == SIM_ACTIV))
+	{
+		pthread_mutex_unlock(&dinner->print_action_mutex);
+		return ;
+	}
+	timestamp = curr_time() - dinner->start_timer_of_sim;
 	printf("%ld %d %s\n", timestamp, philo_id, str);
 	pthread_mutex_unlock(&dinner->print_action_mutex);
 }
