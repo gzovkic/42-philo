@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:35:38 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/18 16:47:47 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/20 12:35:31 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,36 @@ long	curr_time(void)
 
 bool	is_sim_active(t_dinner *dinner)
 {
-	return (dinner->sim_status == SIM_ACTIV);
+	bool	status;
+
+	pthread_mutex_lock(&dinner->print_action_mutex);
+	status = (dinner->sim_status == SIM_ACTIV);
+	pthread_mutex_unlock(&dinner->print_action_mutex);
+	return (status);
 }
 
 void	pthread_creation(t_philo_list *philo_list)
 {
-	int count;
-	t_philo_node *current_node;
-	
+	int				count;
+	t_philo_node	*current_node;
+
 	count = 0;
 	current_node = philo_list->head;
 	while (count < current_node->dinner->number_of_philos && current_node)
 	{
-		pthread_create(&current_node->thread, NULL, &routine,	current_node);
+		pthread_create(&current_node->thread, NULL, &routine, current_node);
 		current_node = current_node->next;
 		count++;
-		if(current_node == philo_list->head)
-		break;
+		if (current_node == philo_list->head)
+			break ;
 	}
 }
 
 void	pthread_wait(t_philo_list *philo_list)
 {
-	int count;
-	t_philo_node *current_node;
-	
+	int				count;
+	t_philo_node	*current_node;
+
 	count = 0;
 	current_node = philo_list->head;
 	while (count < current_node->dinner->number_of_philos && current_node)
