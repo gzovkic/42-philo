@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/19 11:03:30 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/19 15:42:15 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef enum PHILO_ENUMS
 }						t_PHILO;
 
 // src/main.c
+void					*monitor(void *arg);
+bool					monitor_loop(t_philo_list *philo_list, t_dinner *dinner);
 void					*routine(void *arg);
 void					routine_loop(t_philo_node *philo_node);
 
