@@ -19,7 +19,7 @@ vpath %.c $(SRC_DIRS)
 ################################################################################
 
 
-SRC_FILES := main.c fake_libft.c error_checking.c error_checking_utils.c create_structs.c utils.c testing.c philo_action.c
+SRC_FILES := main.c fake_libft.c error_checking.c error_checking_utils.c create_structs.c utils.c philo_action.c monitor_utils.c routines.c
 SRC := $(addprefix src/, $(SRC_FILES))
 
 ################################################################################

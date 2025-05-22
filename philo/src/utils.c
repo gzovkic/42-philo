@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:35:38 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 17:33:29 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/22 09:07:33 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,26 @@ long	curr_time(void)
 	return (time);
 }
 
-bool	is_sim_active(t_dinner *dinner)
-{
-	bool	status;
-
-	pthread_mutex_lock(&dinner->print_action_mutex);
-	status = (dinner->sim_status == SIM_ACTIV);
-	pthread_mutex_unlock(&dinner->print_action_mutex);
-	return (status);
-}
-
 void	pthread_creation(t_philo_list *philo_list)
 {
 	int				count;
-	t_philo_node	*current_node;
+	t_philo_node	*philo_node;
 	int				num_philos;
 
 	if (!philo_list || !philo_list->head || !philo_list->head->dinner)
 		return ;
 	count = 0;
-	current_node = philo_list->head;
-	num_philos = current_node->dinner->number_of_philos;
-	while (count < num_philos && current_node)
+	philo_node = philo_list->head;
+	num_philos = philo_node->dinner->number_of_philos;
+	while (count < num_philos && philo_node)
 	{
-		if (pthread_create(&current_node->thread, NULL, &routine,
-				current_node) != 0)
+		if (pthread_create(&philo_node->thread, NULL, &routine,
+				philo_node) != 0)
 		{
 			ft_putstr_fd("Error creating thread\n", 2);
 			return ;
 		}
-		current_node = current_node->next;
+		philo_node = philo_node->next;
 		count++;
 	}
 }
@@ -60,22 +50,22 @@ void	pthread_creation(t_philo_list *philo_list)
 void	pthread_wait(t_philo_list *philo_list)
 {
 	int				count;
-	t_philo_node	*current_node;
+	t_philo_node	*philo_node;
 	int				num_philos;
 
 	if (!philo_list || !philo_list->head || !philo_list->head->dinner)
 		return ;
 	count = 0;
-	current_node = philo_list->head;
-	num_philos = current_node->dinner->number_of_philos;
-	while (count < num_philos && current_node)
+	philo_node = philo_list->head;
+	num_philos = philo_node->dinner->number_of_philos;
+	while (count < num_philos && philo_node)
 	{
-		if (pthread_join(current_node->thread, NULL) != 0)
+		if (pthread_join(philo_node->thread, NULL) != 0)
 		{
 			ft_putstr_fd("Error joining thread\n", 2);
 			return ;
 		}
-		current_node = current_node->next;
+		philo_node = philo_node->next;
 		count++;
 	}
 }

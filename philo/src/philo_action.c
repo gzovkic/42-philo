@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:02:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 22:27:36 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/22 16:24:46 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ bool	pick_forks(t_philo_node *philo_node)
 	t_dinner	*dinner;
 
 	dinner = philo_node->dinner;
-	if (!is_sim_active(dinner))
-		return (false);
-	if (philo_node->philo_id % 2 == 0)
+	if (philo_node->philo_id % 2 == 1)
 	{
 		pthread_mutex_lock(&philo_node->fork);
 		print_action(dinner, philo_node->philo_id, "has taken a fork");
@@ -28,7 +26,6 @@ bool	pick_forks(t_philo_node *philo_node)
 	}
 	else
 	{
-		usleep(200);
 		pthread_mutex_lock(&philo_node->next->fork);
 		print_action(dinner, philo_node->philo_id, "has taken a fork");
 		pthread_mutex_lock(&philo_node->fork);
@@ -40,16 +37,18 @@ bool	pick_forks(t_philo_node *philo_node)
 void	philo_eat(t_philo_node *philo_node)
 {
 	t_dinner	*dinner;
+	long		current;
 
 	dinner = philo_node->dinner;
-	if (!is_sim_active(dinner))
-		return ;	
-	print_action(dinner, philo_node->philo_id, "is eating");
+	current = curr_time();
+	current -= dinner->start_timer_of_sim;
 	pthread_mutex_lock(&dinner->print_action_mutex);
-	philo_node->time_since_last_meal = curr_time();
+	printf("%ld %d %s\n", current,
+		philo_node->philo_id, "is eating");
+	philo_node->time_since_last_meal = current;
 	philo_node->meals_eaten++;
 	pthread_mutex_unlock(&dinner->print_action_mutex);
-	usleep(dinner->time_to_eat * 1000);
+	ft_usleep(dinner->time_to_eat * 1000);
 }
 
 void	philo_sleep(t_philo_node *philo_node)
@@ -57,34 +56,31 @@ void	philo_sleep(t_philo_node *philo_node)
 	t_dinner	*dinner;
 
 	dinner = philo_node->dinner;
-	if (!is_sim_active(dinner))
-		return ;
 	print_action(dinner, philo_node->philo_id, "is sleeping");
-	usleep(dinner->time_to_sleep * 1000);
+	ft_usleep(dinner->time_to_sleep * 1000);
 }
 
 void	philo_think(t_philo_node *philo_node)
 {
 	t_dinner	*dinner;
+	long		think_time;
 
 	dinner = philo_node->dinner;
-	if (!is_sim_active(dinner))
-		return ;
 	print_action(dinner, philo_node->philo_id, "is thinking");
-	// usleep(time_diff * 1000);
+	think_time = (dinner->time_to_die - (dinner->time_to_eat
+				+ dinner->time_to_sleep));
+	if (think_time > 200)
+		think_time = 200;
+	if (think_time > 0)
+		ft_usleep(think_time * 1000);
 }
 
 void	print_action(t_dinner *dinner, int philo_id, char *str)
 {
 	long	timestamp;
 
-	pthread_mutex_lock(&dinner->print_action_mutex);
-	if (!(dinner->sim_status == SIM_ACTIV))
-	{
-		pthread_mutex_unlock(&dinner->print_action_mutex);
-		return ;
-	}
 	timestamp = curr_time() - dinner->start_timer_of_sim;
+	pthread_mutex_lock(&dinner->print_action_mutex);
 	printf("%ld %d %s\n", timestamp, philo_id, str);
 	pthread_mutex_unlock(&dinner->print_action_mutex);
 }

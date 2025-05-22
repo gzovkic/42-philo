@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 08:35:14 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/20 20:07:36 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/22 13:20:29 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ bool	check_statments(char *argv[], int index, int count)
 		count++;
 	if (argv[index][count] == '\0')
 	{
-		(void)printf("Non numeric argument\n");
+		(void)printf("INVALID: Non numeric argument\n");
 		return (true);
 	}
 	if (argv[index][count] < '0' || argv[index][count] > '9')
 	{
-		(void)printf("Non numeric argument\n");
+		(void)printf("INVALID: Non numeric argument\n");
 		return (true);
 	}
 	return (false);
