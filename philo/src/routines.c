@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 09:01:28 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 22:49:08 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 23:04:38 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ void	one_philo_case(t_philo_node *philo_node)
 	t_dinner	*dinner;
 
 	dinner = philo_node->dinner;
-	start_time = dinner->start_timer_of_sim;
 	philo_think(philo_node);
 	print_action(dinner, philo_node->philo_id, "has taken a fork");
+	start_time = dinner->start_timer_of_sim;
 	pthread_mutex_lock(&dinner->print_action_mutex);
 	philo_node->time_since_last_meal = start_time;
-	ft_usleep(dinner->time_to_die, philo_node);
 	pthread_mutex_unlock(&dinner->print_action_mutex);
+	ft_usleep(dinner->time_to_die, philo_node);
 }

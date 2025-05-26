@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:02:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 22:36:01 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 23:21:07 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,22 @@ void	philo_sleep(t_philo_node *philo_node)
 
 void	philo_think(t_philo_node *philo_node)
 {
-	long	think_time;
+	t_dinner	*dinner;
+	long		think_time;
 
 	if (!is_sim_active_node(philo_node))
 		return ;
-	print_action(philo_node->dinner, philo_node->philo_id, "is thinking");
-	think_time = (philo_node->dinner->time_to_die
-			- (philo_node->dinner->time_to_eat
-				+ philo_node->dinner->time_to_sleep)) / 2;
-	if (think_time > 0 && think_time < 200)
+	dinner = philo_node->dinner;
+	print_action(dinner, philo_node->philo_id, "is thinking");
+	think_time = (dinner->time_to_die - (dinner->time_to_eat
+				+ dinner->time_to_sleep)) / dinner->number_of_philos;
+	if (think_time > 100)
+		think_time = 100;
+	else if (think_time < 0)
+		think_time = 0;
+	if (philo_node->philo_id % 2)
+		usleep(500);
+	if (think_time > 0)
 		ft_usleep(think_time * 1000, philo_node);
 }
 
