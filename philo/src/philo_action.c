@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:02:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 23:44:11 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/27 01:05:15 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	philo_think(t_philo_node *philo_node)
 	dinner = philo_node->dinner;
 	print_action(dinner, philo_node->philo_id, "is thinking");
 	think_time = (dinner->time_to_die - (dinner->time_to_eat
-				+ dinner->time_to_sleep)) / dinner->number_of_philos;
+				+ dinner->time_to_sleep)) / 4;
 	if (think_time > 100)
 		think_time = 100;
 	else if (think_time < 0)
