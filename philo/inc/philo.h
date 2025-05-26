@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/22 16:25:05 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:16:39 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,11 @@ void	print_action(t_dinner *dinner, int philo_id, char *str);
 bool	is_sim_active_node(t_philo_node	*philo_node);
 bool	is_sim_active_list(t_philo_list *philo_list);
 void	tell_philos(t_philo_list *philo_list);
-void	ft_usleep(long ms);
+void	ft_usleep(long ms, t_philo_node *philo_node);
+void	cleanup(t_philo_list *philo_list);
 
 // src/routines.c
-void	*monitor(void *arg);
+void	ft_monitor(t_philo_list *philo_list);
 bool	monitor_loop(t_philo_list *philo_list, t_dinner *dinner);
 void	*routine(void *arg);
 void	routine_loop(t_philo_node *philo_node);

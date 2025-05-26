@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:53:09 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/22 16:24:23 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:13:11 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	tell_philos(t_philo_list *philo_list)
 		count++;
 	}
 }
-void	ft_usleep(long ms)
+void	ft_usleep(long ms, t_philo_node *philo_node)
 {
 	long	start;
 	long	elapsed;
@@ -67,9 +67,38 @@ void	ft_usleep(long ms)
 	start = curr_time();
 	while (1)
 	{
+		if (!is_sim_active_node(philo_node))
+			return ;
 		elapsed = curr_time() - start;
 		if (elapsed >= ms / 1000)
 			break ;
 		usleep(100);
+	}
+}
+void	cleanup(t_philo_list *philo_list)
+{
+	t_philo_node *current;
+	t_philo_node *next;
+	
+	if (!philo_list || !philo_list->head || !philo_list->head->dinner)
+		return ;
+	if (philo_list->head->dinner)
+	{
+		pthread_mutex_destroy(&philo_list->head->dinner->print_action_mutex);
+		free(philo_list->head->dinner);
+	}
+	if (philo_list)
+	{
+		current = philo_list->head;
+		while (current && philo_list->size > 0)
+		{
+			next = current->next;
+			pthread_mutex_destroy(&current->fork);
+			pthread_mutex_destroy(&current->sim_status_mutex);
+			free(current);
+			current = next;
+			philo_list->size--;
+		}
+		free(philo_list);
 	}
 }
