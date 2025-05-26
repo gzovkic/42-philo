@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:35:38 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 21:27:16 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 23:33:11 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	pthread_creation(t_philo_list *philo_list)
 			ft_putstr_fd("Error creating thread\n", 2);
 			return ;
 		}
-		// usleep(5);
 		philo_node = philo_node->next;
 		count++;
 	}

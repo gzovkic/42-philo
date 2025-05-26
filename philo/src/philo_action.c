@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:02:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 23:21:07 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 23:44:11 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	philo_think(t_philo_node *philo_node)
 		think_time = 100;
 	else if (think_time < 0)
 		think_time = 0;
-	if (philo_node->philo_id % 2)
-		usleep(500);
 	if (think_time > 0)
 		ft_usleep(think_time * 1000, philo_node);
 }
