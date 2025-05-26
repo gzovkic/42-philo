@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:22 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 19:16:39 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 20:07:36 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-struct s_philo_node;
+struct	s_philo_node;
 
 typedef struct s_dinner
 {
@@ -64,6 +64,7 @@ bool					check_minus(char *argv[]);
 bool					check_max_int(char *argv[]);
 
 // stc/error_checking_utils.c
+bool					check_meal_must_eat(char *argv[]);
 bool					check_arguments(int argc, char *arvg[]);
 bool					check_statments(char *argv[], int index, int count);
 
@@ -81,6 +82,8 @@ void					add_philo_node(t_philo_list *philo_list,
 void					fill_philo_list(t_philo_list *philo_list,
 							t_dinner *dinner);
 t_philo_list			*init_philo_list(void);
+void					add_to_list(t_philo_list *philo_list,
+							t_philo_node *new_node);
 
 // src/utils.c
 long					curr_time(void);
@@ -88,23 +91,29 @@ void					pthread_creation(t_philo_list *philo_list);
 void					pthread_wait(t_philo_list *philo_list);
 
 // src/philo_action.c
-bool pick_forks(t_philo_node *philo_node);
-void	philo_eat(t_philo_node *philo_node);
-void	philo_sleep(t_philo_node *philo_node);
-void	philo_think(t_philo_node *philo_node);
-void	print_action(t_dinner *dinner, int philo_id, char *str);
+bool					pick_forks(t_philo_node *philo_node);
+void					philo_eat(t_philo_node *philo_node);
+void					philo_sleep(t_philo_node *philo_node);
+void					philo_think(t_philo_node *philo_node);
+void					print_action(t_dinner *dinner, int philo_id, char *str);
 
 // src/monitor_utils.c
-bool	is_sim_active_node(t_philo_node	*philo_node);
-bool	is_sim_active_list(t_philo_list *philo_list);
-void	tell_philos(t_philo_list *philo_list);
-void	ft_usleep(long ms, t_philo_node *philo_node);
-void	cleanup(t_philo_list *philo_list);
+bool					is_sim_active_node(t_philo_node *philo_node);
+bool					is_sim_active_list(t_philo_list *philo_list);
+void					tell_philos(t_philo_list *philo_list);
+void					ft_usleep(long ms, t_philo_node *philo_node);
+void					cleanup(t_philo_list *philo_list);
 
 // src/routines.c
-void	ft_monitor(t_philo_list *philo_list);
-bool	monitor_loop(t_philo_list *philo_list, t_dinner *dinner);
-void	*routine(void *arg);
-void	routine_loop(t_philo_node *philo_node);
-void 	one_philo_case(t_philo_node *philo_node);
+void					ft_monitor(t_philo_list *philo_list);
+bool					monitor_loop(t_philo_list *philo_list);
+void					*routine(void *arg);
+void					routine_loop(t_philo_node *philo_node);
+void					one_philo_case(t_philo_node *philo_node);
 
+// src/more_utils.c
+bool					check_full_philos(t_philo_list *philo_list,
+							t_philo_node *philo_node);
+bool					check_philo_status(t_philo_list *philo_list);
+bool					pick_odd(t_philo_node *philo_node);
+bool					pick_even(t_philo_node *philo_node);

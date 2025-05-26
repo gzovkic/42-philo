@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 11:50:04 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 19:17:48 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:51:46 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	main(int argc, char **argv)
 	t_dinner		*dinner;
 
 	dinner = ft_calloc(sizeof(t_dinner), 1);
-	if(!dinner)
+	if (!dinner)
 	{
 		(void)printf("Memory allocation failed");
-		return(1);
-	}	
+		return (1);
+	}
 	if (check_arguments(argc, argv))
 	{
 		free(dinner);

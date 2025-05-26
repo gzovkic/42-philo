@@ -6,7 +6,7 @@
 /*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:53:09 by gzovkic           #+#    #+#             */
-/*   Updated: 2025/05/26 19:13:11 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/05/26 22:38:03 by gzovkic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	tell_philos(t_philo_list *philo_list)
 		count++;
 	}
 }
+
 void	ft_usleep(long ms, t_philo_node *philo_node)
 {
 	long	start;
@@ -75,11 +76,12 @@ void	ft_usleep(long ms, t_philo_node *philo_node)
 		usleep(100);
 	}
 }
+
 void	cleanup(t_philo_list *philo_list)
 {
-	t_philo_node *current;
-	t_philo_node *next;
-	
+	t_philo_node	*current;
+	t_philo_node	*next;
+
 	if (!philo_list || !philo_list->head || !philo_list->head->dinner)
 		return ;
 	if (philo_list->head->dinner)
